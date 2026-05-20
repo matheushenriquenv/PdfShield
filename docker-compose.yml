@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  # ── Backend FastAPI ─────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: pdfshield-api
+    ports:
+      - "8000:8000"
+    env_file: ./backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  # ── Frontend Next.js ────────────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    container_name: pdfshield-web
+    ports:
+      - "3000:3000"
+    env_file: ./frontend/.env.local
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ── PostgreSQL ──────────────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: pdfshield-db
+    environment:
+      POSTGRES_DB:       pdfshield
+      POSTGRES_USER:     pdfshield
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-pdfshield_local}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pdfshield"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
