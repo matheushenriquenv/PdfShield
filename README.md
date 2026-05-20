@@ -13,13 +13,22 @@ Sistema SaaS completo para venda, proteção e rastreamento de PDFs.
 ## Screenshots
 
 ### Landing Page
-![Landing](docs/images/landing.png)
+![Landing Page](docs/images/landing-page.png)
 
-### Dashboard
-![Dashboard](docs/images/dashboard.png)
+### Como Funciona
+![How It Works](docs/images/how-it-works.png)
 
-### Upload
-![Upload](docs/images/upload.png)
+### Painel Administrativo
+![Admin Dashboard](docs/images/admin-dashboard.png)
+
+### Painel de Rastreamento
+![Tracking Dashboard](docs/images/tracking-dashboard.png)
+
+### Logs do Sistema
+![Logs Panel](docs/images/logs-panel.png)
+
+### Página do Produto
+![Product Page](docs/images/product-page.png)
 
 ---
 
