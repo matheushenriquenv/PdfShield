@@ -7,84 +7,77 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 ![Stripe](https://img.shields.io/badge/Stripe-Payments-purple)
 
-### Sell PDFs. Track leaks. Protect your work.
+Bem-vindo ao meu projeto. O PDFShield é um sistema que estou desenvolvendo em Python para resolver um problema real: a pirataria de e-books e infoprodutos.
 
-🚧 Projeto em desenvolvimento (MVP)
+Se alguém compra um livro digital e decide compartilhá-lo ilegalmente na internet, o PDFShield consegue descobrir quem foi. Ele faz isso carimbando o PDF com marcas d'água visíveis e também com rastreadores escondidos no código do arquivo, baseados nos dados de quem comprou (como Nome e e-mail).
 
-PDFShield é uma plataforma SaaS focada em venda, proteção e rastreamento de PDFs.
+📌 Nota de Estudante: Este é o meu primeiro grande projeto no GitHub! Ele nasceu do meu desejo de aprender mais sobre manipulação de arquivos binários, segurança de dados e integrações de backend com APIs de pagamento. O projeto ainda está em andamento e pretendo evoluí-lo muito mais.
 
-O projeto está em desenvolvimento contínuo com foco em:
-- segurança
-- automação
-- arquitetura backend
-- rastreamento antifraude
-- distribuição segura de conteúdo digital
+💡 O que o projeto já faz?
+Rastreamento Invisível: Converte as informações do comprador em caracteres invisíveis e insere-os no meio do texto do PDF. Mesmo que a pessoa apague as marcas visíveis, o rastreador continua lá se o texto for copiado.
+
+Marcas d'água: Cria overlays bonitos e diagonais dizendo "Uso Exclusivo de [Nome do Comprador]".
+
+Simulador de Pagamentos: Já está preparado com a lógica para receber avisos automáticos (Webhooks) do Stripe e Mercado Pago quando uma venda for aprovada.
+
+Detetor de Fugas: Tem uma aba onde o administrador coloca o PDF que foi vazado e o sistema faz uma varredura para revelar os dados do comprador original na hora.
+
+🛠️ Como testar no teu computador (Muito fácil!)
+Para facilitar os meus testes e permitir que qualquer pessoa veja o projeto a funcionar sem precisar de configurar bancos de dados complexos ou Docker, criei um servidor local super leve que roda direto no terminal.
+
+1. Instala as duas bibliotecas necessárias:
+Bash
+pip install reportlab pypdf
+2. Executa o teste automatizado:
+Este script simula uma compra inteira, gera o PDF e testa se o detetor de vazamentos está a funcionar:
+
+Bash
+python testar_local.py
+3. Abre o Painel no Navegador:
+Queres ver o visual? Executa este comando:
+
+Bash
+python server_local.py
+Agora abre o teu navegador em http://localhost:8000. Criei um painel interativo onde podes fazer upload de um PDF e ver a mágica acontecer!
+
+📈 Próximos Passos (O que pretendo implementar)
+Como o projeto está em desenvolvimento, as minhas próximas metas de estudo são:
+
+Conectar a API (FastAPI) ao banco de dados PostgreSQL (já criei o arquivo init.sql, agora falta integrá-lo ao código Python).
+
+Substituir os dicionários temporários em memória por salvamento real no banco de dados.
+
+Criar uma interface frontend mais robusta.
+
+✉️ Feedback: Se tiveres alguma sugestão de melhoria no código ou na segurança, deixa uma Issue ou entra em contacto. Estou aqui para aprender!
 
 ## Screenshots
 
-### Landing Page
+### 🖥️ Landing Page
+Interface limpa focada na conversão e apresentação da proposta de valor do produto.
 ![Landing Page](docs/images/landing-page.png)
 
-### Como Funciona
+### ⚙️ Como Funciona
+Seção interativa explicando visualmente o processo de proteção em camadas para o cliente final.
 ![How It Works](docs/images/how-it-works.png)
 
-### Painel Administrativo
+### 📊 Painel Administrativo
+Dashboard do infoprodutor com métricas de vendas, faturamento e status dos arquivos.
 ![Admin Dashboard](docs/images/admin-dashboard.png)
 
-### Painel de Rastreamento
+### 🎯 Painel de Rastreamento (Detecção de Vazamentos)
+Área onde o administrador faz o upload do PDF suspeito para identificar o comprador original.
 ![Tracking Dashboard](docs/images/tracking-dashboard.png)
 
-### Logs do Sistema
+### 🪵 Logs do Sistema
+Histórico em tempo real de tentativas de download, geração de tokens e eventos de auditoria.
 ![Logs Panel](docs/images/logs-panel.png)
 
-### Página do Produto
+### 📦 Página do Produto
+Fluxo de checkout direto focado na experiência do usuário antes do redirecionamento de pagamento.
 ![Product Page](docs/images/product-page.png)
 
 ---
-
-## Status do Projeto
-
-🚧 MVP em desenvolvimento.
-
-Funcionalidades principais já implementadas:
-- Upload de PDFs
-- Marca d’água dinâmica
-- Fingerprint invisível
-- Links temporários
-- Integração com pagamentos
-- Rastreamento de vazamentos
-
-Melhorias planejadas:
-- JWT Authentication
-- Redis
-- Dashboard avançado
-- Logs de auditoria
-- Sistema antifraude
-- Analytics
-
----
-
-## Aprendizados
-
-Durante o desenvolvimento do PDFShield foram praticados conceitos como:
-- arquitetura backend com FastAPI
-- Docker
-- integração com APIs externas
-- webhooks
-- geração dinâmica de PDFs
-- rastreamento de arquivos
-- estruturação de SaaS
-
-  ---
-
-  ## Desafios
-
-Os principais desafios encontrados até agora foram:
-- criação de fingerprints invisíveis em PDFs
-- rastreamento de vazamentos
-- integração de pagamentos
-- controle de downloads temporários
-- organização da arquitetura do sistema
 
 ## Estrutura do projeto
 
@@ -191,16 +184,24 @@ server {
 
 ---
 
-## Fluxo completo de venda
+## 🔄 Fluxo Completo de Venda e Proteção
 
 ```
-1. Comprador acessa pdfshield.app
-2. Preenche nome, e-mail, CPF → clica Comprar
-3. Redirecionado para Stripe (Cartão/Boleto) ou MP (PIX)
-4. Pagamento confirmado → webhook dispara
-5. Backend gera PDF com fingerprint única (< 2 segundos)
-6. E-mail enviado com link de download temporário (48h / 2 downloads)
-7. Comprador clica → recebe PDF personalizado com seus dados
+sequenceDiagram
+    autonumber
+    actor C as Comprador
+    participant F as Frontend (Next.js)
+    participant B as Backend (FastAPI)
+    participant G as Gateway (Stripe/MP)
+    
+    C->>F: Insere Nome, E-mail e CPF
+    F->>G: Cria Sessão de Checkout
+    G->>C: Exibe Tela de Pagamento
+    C->>G: Efetua o Pagamento
+    G->>B: Dispara Webhook (Aprovado)
+    Note over B: Motor processa em memória RAM<br/>Injeta marcas d'água e ZWC invisível
+    B->>C: Envia E-mail com Link Temporário (48h)
+    C->>B: Clica no Link e descarrega o PDF Protegido
 ```
 
 ## Detectar vazamento
