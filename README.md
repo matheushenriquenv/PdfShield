@@ -10,6 +10,17 @@
 Sistema SaaS completo para venda, proteção e rastreamento de PDFs.
 **Stack:** FastAPI + Next.js + PostgreSQL + Docker
 
+## Screenshots
+
+### Landing Page
+![Landing](docs/images/landing.png)
+
+### Dashboard
+![Dashboard](docs/images/dashboard.png)
+
+### Upload
+![Upload](docs/images/upload.png)
+
 ---
 
 ## Estrutura do projeto
