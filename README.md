@@ -7,8 +7,18 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 ![Stripe](https://img.shields.io/badge/Stripe-Payments-purple)
 
-Sistema SaaS completo para venda, proteção e rastreamento de PDFs.
-**Stack:** FastAPI + Next.js + PostgreSQL + Docker
+### Sell PDFs. Track leaks. Protect your work.
+
+🚧 Projeto em desenvolvimento (MVP)
+
+PDFShield é uma plataforma SaaS focada em venda, proteção e rastreamento de PDFs.
+
+O projeto está em desenvolvimento contínuo com foco em:
+- segurança
+- automação
+- arquitetura backend
+- rastreamento antifraude
+- distribuição segura de conteúdo digital
 
 ## Screenshots
 
@@ -31,6 +41,50 @@ Sistema SaaS completo para venda, proteção e rastreamento de PDFs.
 ![Product Page](docs/images/product-page.png)
 
 ---
+
+## Status do Projeto
+
+🚧 MVP em desenvolvimento.
+
+Funcionalidades principais já implementadas:
+- Upload de PDFs
+- Marca d’água dinâmica
+- Fingerprint invisível
+- Links temporários
+- Integração com pagamentos
+- Rastreamento de vazamentos
+
+Melhorias planejadas:
+- JWT Authentication
+- Redis
+- Dashboard avançado
+- Logs de auditoria
+- Sistema antifraude
+- Analytics
+
+---
+
+## Aprendizados
+
+Durante o desenvolvimento do PDFShield foram praticados conceitos como:
+- arquitetura backend com FastAPI
+- Docker
+- integração com APIs externas
+- webhooks
+- geração dinâmica de PDFs
+- rastreamento de arquivos
+- estruturação de SaaS
+
+  ---
+
+  ## Desafios
+
+Os principais desafios encontrados até agora foram:
+- criação de fingerprints invisíveis em PDFs
+- rastreamento de vazamentos
+- integração de pagamentos
+- controle de downloads temporários
+- organização da arquitetura do sistema
 
 ## Estrutura do projeto
 
