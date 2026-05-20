@@ -1,5 +1,12 @@
 # PDFShield 🛡
 
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![Next.js](https://img.shields.io/badge/Next.js-Frontend-black)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Stripe](https://img.shields.io/badge/Stripe-Payments-purple)
+
 Sistema SaaS completo para venda, proteção e rastreamento de PDFs.
 **Stack:** FastAPI + Next.js + PostgreSQL + Docker
 
